@@ -22,7 +22,10 @@ namespace SnakeOOP
             Console.ForegroundColor = ConsoleColor.Yellow;
             FoodGenerator foodGenerator = new FoodGenerator(80, 25, '$');
             Point food = foodGenerator.GenerateFood();
+            FoodGenerator badFoodGenerator = new FoodGenerator(80, 25, '!');
+            Point Badfood = badFoodGenerator.GenerateBadFood();
             food.Draw();
+            Badfood.Draw();
             
             while(true)
             {
@@ -37,7 +40,14 @@ namespace SnakeOOP
                     food = foodGenerator.GenerateFood();
                     food.Draw();
                     score++;
-                }else
+                }
+                else if(snake.Eat(Badfood))
+                {
+                    Badfood = badFoodGenerator.GenerateBadFood();
+                    Badfood.Draw();
+                    score--;
+                }
+                else
                 {
                     snake.Move();
                 }
